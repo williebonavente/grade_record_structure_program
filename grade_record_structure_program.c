@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <conio.h>
+#include <stdlib.h>
 
 struct Student {
     char name[50];
@@ -7,10 +8,10 @@ struct Student {
     float finalGrade;
 };
 
-void record();
-void display_record();
-void mainmenu();
-void add_record();
+void record(struct Student students[]);
+void display_record(struct Student students[]);
+void mainmenu(struct Student students[]);
+void add_record(struct Student students[]);
 
 int main()
 {
@@ -34,26 +35,6 @@ int main()
     getch();
     record(students);
 
-    system("cls");
-    char choice;
-
-    printf("\n\t    ***\n");
-    printf("Do you want to Input another Record?[Y/N]: ");
-    getchar();
-    choice = getchar();
-    if (choice == 'Y' || choice == 'y')
-    {
-        add_record();
-    }
-    else if (choice == 'N' || choice == 'n')
-    {
-        display_record(students);
-    }
-    else
-    {
-        printf("Invalid Input");
-    }
-
     return 0;
 }
 
@@ -62,10 +43,12 @@ void record(struct Student students[])
     //ask for the name, midterm grade, final grade
     system("cls");
     
-    for (int i = 0; i < 2; i++) 
+    printf("\n\t***\n");
+    printf("\nInput 5 student records\n");
+    for (int i = 0; i < 5; i++) 
     {
 
-        printf("Enter 5 information for student %d:\n", i + 1);
+        printf("Enter information for student %d:\n", i + 1);
 
         printf("Name: ");
         scanf("%s", students[i].name);
@@ -78,10 +61,10 @@ void record(struct Student students[])
 
         printf("\n");
     }
-    mainmenu();
+    mainmenu(students);
 }
 
-/*void mainmenu()
+void mainmenu(struct Student students[])
 {
     system("cls");
     char choice;
@@ -92,7 +75,7 @@ void record(struct Student students[])
     choice = getchar();
     if (choice == 'Y' || choice == 'y')
     {
-        add_record();
+        add_record(students);
     }
     else if (choice == 'N' || choice == 'n')
     {
@@ -102,27 +85,29 @@ void record(struct Student students[])
     {
         printf("Invalid Input");
     }
-}*/
+}
 
 void display_record(struct Student students[])
 {
     //if they don;t want to add another record, the main function will terminate then display the current record(current_record function)
-    printf("Student records:\n");
-    printf("Name\t\tMidterm Grade\tFinalGrade\tAve.Grade\n");
+    system("cls");
+    printf("\n\t\t***\n");
+    printf("\nStudent records:\n");
+    printf("Name\t\tMidterm Grade\t\tFinalGrade\tAve.Grade\n");
     for (int i = 0; i < 5; i++) {
-        printf("%s\t\t%f\t\t%f\t\t%.2f\n", students[i].name, students[i].midtermGrade, students[i].finalGrade, (students[i].midtermGrade + students[i].finalGrade) / 2.0);
+        printf("%s\t\t%2.f\t\t%2.f\t\t%.2f\n", students[i].name, students[i].midtermGrade, students[i].finalGrade, (students[i].midtermGrade + students[i].finalGrade) / 2.0);
     }
-    getch();
 }
 
 
-void add_record()
+void add_record(struct Student students[])
 {
     //option if they want to add another record
     system("cls");
     int a;
     struct Student add[a];
 
+    printf("\n\t\t***\n");
     printf("How many do you want to add? ");
     scanf("%d", &a);
     for (int i = 0; i < a; i++) {
@@ -139,4 +124,14 @@ void add_record()
         
         printf("\n");
     }
+    system("cls");
+
+    display_record(students);
+
+    printf("Student records:\n");
+    printf("Name\t\tMidterm Grade\tFinalGrade\tAve.Grade\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%s\t\t%2.f\t%2.f\t%.2f\n", add[i].name, add[i].midtermGrade, add[i].finalGrade, (add[i].midtermGrade + add[i].finalGrade) / 2.0);
+    }
+    return 0;
 }
