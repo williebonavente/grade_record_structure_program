@@ -8,7 +8,7 @@ struct Student {
 };
 
 void record();
-void displaya_record();
+void display_record();
 void mainmenu();
 void add_record();
 
@@ -33,6 +33,27 @@ int main()
     printf("\nPress any key to continue");
     getch();
     record(students);
+
+    system("cls");
+    char choice;
+
+    printf("\n\t    ***\n");
+    printf("Do you want to Input another Record?[Y/N]: ");
+    getchar();
+    choice = getchar();
+    if (choice == 'Y' || choice == 'y')
+    {
+        add_record();
+    }
+    else if (choice == 'N' || choice == 'n')
+    {
+        display_record(students);
+    }
+    else
+    {
+        printf("Invalid Input");
+    }
+
     return 0;
 }
 
@@ -50,28 +71,17 @@ void record(struct Student students[])
         scanf("%s", students[i].name);
 
         printf("Midterm grade: ");
-        scanf("%d", &students[i].midtermGrade);
+        scanf("%f", &students[i].midtermGrade);
 
         printf("Final grade: ");
-        scanf("%d", &students[i].finalGrade);
+        scanf("%f", &students[i].finalGrade);
 
         printf("\n");
     }
+    mainmenu();
 }
 
-void display_record(struct Student students[])
-{
-    //if they don;t want to add another record, the main function will terminate then display the current record(current_record function)
-    printf("Student records:\n");
-    printf("Name\t\tMidterm Grade\tFinalGrade\tAve.Grade\n");
-    for (int i = 0; i < 5; i++) {
-        printf("%s\t\t%d\t\t%d\t\t%.2f\n", students[i].name, students[i].midtermGrade, students[i].finalGrade, (students[i].midtermGrade + students[i].finalGrade) / 2.0);
-    }
-    getch();
-}
-
-
-void mainmenu()
+/*void mainmenu()
 {
     system("cls");
     char choice;
@@ -86,13 +96,25 @@ void mainmenu()
     }
     else if (choice == 'N' || choice == 'n')
     {
-        display_record();
+        display_record(students);
     }
     else
     {
         printf("Invalid Input");
     }
+}*/
+
+void display_record(struct Student students[])
+{
+    //if they don;t want to add another record, the main function will terminate then display the current record(current_record function)
+    printf("Student records:\n");
+    printf("Name\t\tMidterm Grade\tFinalGrade\tAve.Grade\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%s\t\t%f\t\t%f\t\t%.2f\n", students[i].name, students[i].midtermGrade, students[i].finalGrade, (students[i].midtermGrade + students[i].finalGrade) / 2.0);
+    }
+    getch();
 }
+
 
 void add_record()
 {
@@ -110,10 +132,10 @@ void add_record()
         scanf("%s", add[i].name);
         
         printf("Midterm grade: ");
-        scanf("%d", &add[i].midtermGrade);
+        scanf("%f", &add[i].midtermGrade);
         
         printf("Final grade: ");
-        scanf("%d", &add[i].finalGrade);
+        scanf("%f", &add[i].finalGrade);
         
         printf("\n");
     }
