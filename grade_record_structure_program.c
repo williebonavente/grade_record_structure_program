@@ -93,9 +93,9 @@ void display_record(struct Student students[])
     system("cls");
     printf("\n\t\t***\n");
     printf("\nStudent records:\n");
-    printf("Name\t\tMidterm Grade\t\tFinalGrade\tAve.Grade\n");
+    printf("Name\t\tMidterm Grade\tFinalGrade\tAve.Grade\n");
     for (int i = 0; i < 5; i++) {
-        printf("%s\t\t%2.f\t\t%2.f\t\t%.2f\n", students[i].name, students[i].midtermGrade, students[i].finalGrade, (students[i].midtermGrade + students[i].finalGrade) / 2.0);
+        printf("%s\t\t%.2f\t\t%.2f\t\t%.2f\n", students[i].name, students[i].midtermGrade, students[i].finalGrade, (students[i].midtermGrade + students[i].finalGrade) / 2.0);
     }
 }
 
@@ -128,10 +128,8 @@ void add_record(struct Student students[])
 
     display_record(students);
 
-    printf("Student records:\n");
-    printf("Name\t\tMidterm Grade\tFinalGrade\tAve.Grade\n");
-    for (int i = 0; i < 5; i++) {
-        printf("%s\t\t%2.f\t%2.f\t%.2f\n", add[i].name, add[i].midtermGrade, add[i].finalGrade, (add[i].midtermGrade + add[i].finalGrade) / 2.0);
+    for (int i = 0; i < a; i++) {
+        printf("%s\t\t%.2f\t\t%.2f\t\t%.2f\n", add[i].name, add[i].midtermGrade, add[i].finalGrade, (add[i].midtermGrade + add[i].finalGrade) / 2.0);
     }
-    return 0;
+    getch();
 }
